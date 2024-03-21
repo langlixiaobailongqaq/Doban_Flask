@@ -1,8 +1,8 @@
 # Douban_Flask
 
 #### 介绍
-豆瓣电影TOP250数据分析
-应用Python爬虫/Flask框架/Echarts插件/WordCloud等技术实现
+* 豆瓣电影TOP250数据分析   
+* 应用Python爬虫/Flask框架/Echarts插件/WordCloud等技术实现
 
 #### 软件架构
 软件架构说明
@@ -10,15 +10,17 @@
 
 #### 安装教程
 
-1.  xxxx
+1.  安装所需的第三方库：pip install -r requirements.txt
 2.  xxxx
 3.  xxxx
 
-#### 使用说明
+#### 项目简介
 
-1.  Flask框架
-2.  xxxx
-3.  xxxx
+1.  Python3.8 + Flask 3.0.2
+2.  使用爬取豆瓣电影TOP250的数据，并使用Flask框架搭建一个简单的Web应用，实现对电影信息的展示、搜索、排序和分页功能。
+3.  使用Echarts插件实现电影评分、电影类型、电影地区、电影年份的分布图展示。
+4.  使用WordCloud插件实现电影名称的词云展示。 
+5. 页面截图---
 
 #### 参与贡献
 

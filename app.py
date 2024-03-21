@@ -13,6 +13,10 @@ from flask import Flask, render_template
 app = Flask(__name__)
 
 
+# 启用调试模式
+app.debug = True
+
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -20,11 +24,13 @@ def index():
 
 @app.route('/index')
 def home():
+    """ 首页 """
     return render_template('index.html')
 
 
 @app.route('/movie')
 def movie():
+    """ 电影详情 """
     data_list = []
     con = sqlite3.connect('movie250.db')
     cur = con.cursor()
@@ -38,14 +44,28 @@ def movie():
     return render_template('movie.html', movies=data_list)
 
 
-
 @app.route('/score')
 def score():
-    return render_template('score.html')
+    """ 电影评分 """
+    # 评分
+    score = []
+    # 每一个电影评分对应的电影数量
+    num = []
+    con = sqlite3.connect('movie250.db')
+    cur = con.cursor()
+    sql = "select score,count(score) from movie250 group by score"
+    data = cur.execute(sql)
+    for item in data:
+        score.append(str(item[0]))
+        num.append(item[1])
+    cur.close()
+    con.close()
+    return render_template('score.html', score=score, num=num)
 
 
 @app.route('/word')
 def word():
+    """ 词云 """
     return render_template('word.html')
 
 
