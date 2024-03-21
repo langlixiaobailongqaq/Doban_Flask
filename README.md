@@ -11,17 +11,30 @@
 #### 安装教程
 
 1.  安装所需的第三方库：pip install -r requirements.txt
-2.  xxxx
-3.  xxxx
+2.  运行：python app.py
+
 
 #### 项目简介
 
 1.  Python3.8 + Flask 3.0.2
 2.  使用爬取豆瓣电影TOP250的数据，并使用Flask框架搭建一个简单的Web应用，实现对电影信息的展示、搜索、排序和分页功能。
 3.  使用Echarts插件实现电影评分、电影类型、电影地区、电影年份的分布图展示。
-4.  使用WordCloud插件实现电影名称的词云展示。 
-5. 页面截图---
+4.  使用WordCloud插件实现电影简介的词云展示。
 
+* 未做
+  * 实现对电影信息的、搜索、排序和分页功能。
+  * 使用Echarts插件实现电影评分、电影类型、电影地区(未做)、电影年份(未做)的分布图展示。
+
+* 知识点：生成项目虚拟环境下所需的第三方模块( pip freeze > requirements.txt 命令，会将不是虚拟环境下的第三方模块加到requirements.txt文件中) 
+  * pip install pipreqs
+  * pipreqs  ./
+
+
+
+5. ![img.png](img.png)
+![img_1.png](img_1.png)
+6. ![img_2.png](img_2.png)
+7. ![img_3.png](img_3.png)
 #### 参与贡献
 
 1.  Fork 本仓库

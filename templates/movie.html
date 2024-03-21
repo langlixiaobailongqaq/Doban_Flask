@@ -26,13 +26,16 @@
 
   <!-- Template Main CSS File -->
   <link href="static/assets/css/style.css" rel="stylesheet">
-
+  <style>
+    #page {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
 </head>
 
 <body>
-
-  <!-- ======= Top Bar ======= -->
-
   <!-- ======= Header ======= -->
   <header id="header">
     <div class="container">
@@ -45,18 +48,17 @@
 
       <nav class="nav-menu float-right d-none d-lg-block">
         <ul>
-          <li class="active"><a href="/index">首页 <i class="la la-angle-down"></i></a></li>
-          <li><a href="/movie">电影</a></li>
+          <li ><a href="/index">首页 <i class="la la-angle-down"></i></a></li>
+          <li class="active"><a href="/movie">电影</a></li>
           <li><a href="/score">评分</a></li>
           <li><a href="/word">词云</a></li>
           <li><a href="/team">团队</a></li>
         </ul>
-      </nav><!-- .nav-menu -->
+      </nav>
 
     </div>
   </header><!-- End Header -->
-
-<!-- ======= Our Team Section ======= -->
+    <!-- ======= Our Team Section ======= -->
     <section id="team" class="team">
       <div class="container">
 
@@ -64,38 +66,48 @@
           <h2>豆瓣电影TOP250数据分析</h2>
           <p>应用Python爬虫/Flask框架/Echarts插件/WordCloud等技术实现</p>
         </div>
-<!-- ======= End Our Team Section ======= -->
+<!-- ======= Counts Section ======= -->
+        <section class="counts section-bg">
+          <div class="container table-responsive">
 
+           <table class="table text-nowrap">
+               <tr class="text-center">
+                   <td>电影排名</td>
+                   <td>电影中文名称</td>
+                   <td>电影外国名称</td>
+                   <td>电影评分</td>
+                   <td>评价人数</td>
+                   <td>电影简述</td>
+                   <td>其他信息</td>
+               </tr>
+               {% for movie in movies %}
+                    <tr class="text-center">
+                       <td>{{movie[0]}}</td>
+                       <td>
+                           <a href="{{ movie[1] }}" target="_blank">
+                               {{movie[3]}}
+                           </a>
+                       </td>
+                       <td>{{movie[4]}}</td>
+                       <td>{{movie[5]}}</td>
+                       <td>{{movie[6]}}</td>
+                       <td>{{movie[7]}}</td>
+                       <td>{{movie[8]}}</td>
+                    </tr>
+               {% endfor %}
+           </table>
 
-    <!-- ======= Counts Section ======= -->
-    <section class="counts section-bg">
-      <div class="container table-responsive">
-        <table class="table text-nowrap">
-          <tr class="text-center">
-            <td>电影排名</td>
-            <td>电影中文名称</td>
-            <td>电影外国名称</td>
-            <td>电影评分</td>
-            <td>评价人数</td>
-            <td>电影简述</td>
-            <td>其它信息</td>
-          </tr>
-          {% for movie in movies %}
-            <tr class="text-center">
-              <td>{{ movie[0] }}</td>
-              <td><a href="{{ movie[1] }}" target="_blank">{{ movie[3] }}</a></td>
-              <td>{{ movie[4] }}</td>
-              <td>{{ movie[5] }}</td>
-              <td>{{ movie[6] }}</td>
-              <td>{{ movie[7] }}</td>
-              <td>{{ movie[8] }}</td>
-            </tr>
-          {% endfor %}
-        </table>
-
+            <nav id="page">
+              <ul class="pagination">
+                {% for i in range(1, total_pages+1) %}
+                  <li class="page-item {% if i == current_page %}active{% endif %}">
+                    <a class="page-link" href="{{ url_for('movie', page=i) }}">{{ i }}</a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </nav>
       </div>
-    </section><!-- End Counts Section -->
-
+    </section><!-- End Our Team Section -->
 
   <!-- ======= Footer ======= -->
   <footer id="footer">
