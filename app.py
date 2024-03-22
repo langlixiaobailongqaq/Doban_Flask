@@ -21,79 +21,67 @@ app.debug = True
 
 @app.route('/')
 def index():
-    # 景点电影数量、评分统计、词汇统计
+    """ 首页-景点电影数量、评分统计、词汇统计 """
+    # 景点电影数量
     movie_number = []
+    # 电影总分
     score_statistics = []
+    # 词汇统计
     vocabulary_statistics = len(GenerateWordCloud().cut_dada())
+    # 电影总人数
     total_people = []
 
     con = sqlite3.connect("movie250.db")
     cur = con.cursor()
-    sql = "select count(id) from movie250"
+    sql = "select count(id),SUM(score),SUM(rated) from movie250"
     data = cur.execute(sql)
     for item in data:
-        movie_number.append(item)
-
-    # 电影总分
-    total_score = "select SUM(score) from movie250"
-    total_score_data = cur.execute(total_score)
-    for item in total_score_data:
-        score_statistics.append(item)
-
-    # 电影总人数
-    people = "select SUM(rated) from movie250"
-    total_people_data = cur.execute(people)
-    for item in total_people_data:
-        total_people.append(item)
+        movie_number.append(item[0])
+        score_statistics.append(item[1])
+        total_people.append(item[2])
     cur.close()
     con.close()
 
-    movie_number = movie_number[0][0]
-    score_statistics = score_statistics[0][0]
-    total_people = total_people[0][0]
+    movie_number = movie_number[0]
+    score_statistics = score_statistics[0]
+    total_people = total_people[0]
     score_statistics = round(score_statistics * total_people / total_people / movie_number, 1)
-    print(total_people)
+    # print(movie_number, score_statistics,  total_people)
     return render_template('index.html', movie_number=movie_number, vocabulary_statistics=vocabulary_statistics,
                            score_statistics=score_statistics)
 
 
 @app.route('/index')
 def home():
-    """ 首页 """
-    # 景点电影数量、评分统计、词汇统计
+    """ 首页-景点电影数量、评分统计、词汇统计 """
+    # 景点电影数量
     movie_number = []
+    # 电影总分
     score_statistics = []
+    # 词汇统计
     vocabulary_statistics = len(GenerateWordCloud().cut_dada())
+    # 电影总人数
     total_people = []
 
     con = sqlite3.connect("movie250.db")
     cur = con.cursor()
-    sql = "select count(id) from movie250"
+    sql = "select count(id),SUM(score),SUM(rated) from movie250"
     data = cur.execute(sql)
     for item in data:
-        movie_number.append(item)
-
-    # 电影总分
-    total_score = "select SUM(score) from movie250"
-    total_score_data = cur.execute(total_score)
-    for item in total_score_data:
-        score_statistics.append(item)
-
-    # 电影总人数
-    people = "select SUM(rated) from movie250"
-    total_people_data = cur.execute(people)
-    for item in total_people_data:
-        total_people.append(item)
+        movie_number.append(item[0])
+        score_statistics.append(item[1])
+        total_people.append(item[2])
     cur.close()
     con.close()
 
-    movie_number = movie_number[0][0]
-    score_statistics = score_statistics[0][0]
-    total_people = total_people[0][0]
+    movie_number = movie_number[0]
+    score_statistics = score_statistics[0]
+    total_people = total_people[0]
     score_statistics = round(score_statistics * total_people / total_people / movie_number, 1)
-    print(total_people)
+    # print(movie_number, score_statistics,  total_people)
     return render_template('index.html', movie_number=movie_number, vocabulary_statistics=vocabulary_statistics,
                            score_statistics=score_statistics)
+
 
 @app.route('/movie')
 def movie():
