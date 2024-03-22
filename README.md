@@ -23,11 +23,12 @@
 
 * 未做
   * 实现对电影信息的、搜索、排序和分页功能。
-  * 使用Echarts插件实现电影评分、电影类型、电影地区(未做)、电影年份(未做)的分布图展示。
+  * 使用Echarts插件实现电影评分、电影类型、电影地区(未做)、电影年份(未做)的分布图展示。  
 
 * 知识点：生成项目虚拟环境下所需的第三方模块( pip freeze > requirements.txt 命令，会将不是虚拟环境下的第三方模块加到requirements.txt文件中) 
-  * pip install pipreqs
-  * pipreqs  ./
+  * 使用 pipreqs：
+    * pip install pipreqs
+    * pipreqs  ./
 
 
 
