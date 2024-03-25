@@ -89,8 +89,38 @@ def movie():
     data_list = []
     con = sqlite3.connect("movie250.db")
     cur = con.cursor()
-    sql = "select * from movie250"
+    sql = "select * from movie250 ORDER BY ename, score DESC"
     data = cur.execute(sql)
+    for item in data:
+        data_list.append(item)
+    cur.close()
+    con.close()
+
+    # 当前页码，从第一页开始
+    page = int(request.args.get("page", 1))
+    # 每页的数量
+    per_page = int(request.args.get('per_page', 25))
+
+    # 计算开始和结束项
+    start = (page - 1) * per_page
+    end = start + per_page
+
+    # 获取当前页面的数据
+    paginate_data = data_list[start:end]
+    # 计算总页数
+    total_pages = (len(data_list) + per_page - 1) // per_page
+    return render_template('movie.html', movies=paginate_data, total_pages=total_pages, current_page=page)
+
+
+@app.route('/search', methods=['GET'])
+def search():
+    """ 搜索 """
+    keyword = request.args.get('q', '')
+    con = sqlite3.connect("movie250.db")
+    cur = con.cursor()
+    sql = "select * from movie250 where cname like '%{}%'".format(keyword)
+    data = cur.execute(sql)
+    data_list = []
     for item in data:
         data_list.append(item)
     cur.close()
